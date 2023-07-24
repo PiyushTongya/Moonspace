@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monster Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@next"></script>
+    
+</head>
+
+<body>
+    <div class="root">
+    <div class="main" id="root">
+        <h1>Battle with <span style="color: blue;">Player And Monster </span></h1>
+        <section class="health">
+            <div class="player">
+                <div class="playerHealth" :style="playerBarStyle"></div>
+            </div>
+            <p style="color: blueviolet;">Player Health</p>
+            <div class="monster">
+                <div class="monsterHealth" :style="monsterBarStyle"></div>
+            </div>
+            <p style="color: blueviolet;">Monster Health</p>
+        </section>
+
+        <section class="container" v-if="winner">
+            <h2>Game Over</h2>
+            <h3 v-if="winner == 'player' ">You Won !</h3>
+            <h3 v-else-if="winner == 'monster'">You Lost !</h3>
+            <h3 v-else>It's a draw !</h3>
+            <button @click="startGame">Start Game</button>
+        </section>
+
+        <section class="actions" v-else>
+            <button @click="attackMonster">Attack</button>
+            <button :disabled="mayUseSpecialAttack" @click="specialAttack">
+                Special Attack
+            </button>
+            <button @click="playerHeal">Heal</button>
+            <button @click="surrender">Surrender</button>
+        </section>
+
+        <section class="logs container">
+            <ul>
+              <li v-for="logMessage in logMessages">
+                {{logMessage.actionBy}} - {{logMessage.actionType}} -
+                {{logMessage.actionValue}}
+              </li>
+            </ul>
+          </section>
+          
+    </div>
+</div>
+</body>
+<script src="index.js"></script>
+
+</html>
